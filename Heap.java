@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class Heap <E extends Comparable<E>>{
     static final int MIN_SIZE = 15;
-    static final boolean IS_MAX_HEAP = false;
+    static final boolean IS_MAX_HEAP = true;
     
     private int size = 0;
     private E[] array = (E[]) new Comparable[MIN_SIZE];
@@ -53,7 +53,7 @@ public class Heap <E extends Comparable<E>>{
         if(left >= size) return;
         if(child >= size || isBefore(array[left].compareTo(array[child]))) child = left;
 
-        if(child < size && array[node].compareTo(array[child]) > 0){
+        if(child < size && isBefore(array[child].compareTo(array[node]))){
             swap(node, child);
             sink(child);
         }
