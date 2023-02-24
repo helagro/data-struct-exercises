@@ -1,18 +1,36 @@
 import java.util.Random;
 
 public class Heap <E extends Comparable<E>>{
-    static final int MIN_SIZE = 15;
-    static final boolean IS_MAX_HEAP = true;
+    static final int MIN_SIZE = 5;
+    static final boolean IS_MAX_HEAP = false;
+    static final double GROWTH_FACTOR = 1.5;
+    static final double MIN_FILL_FACTOR = 0.3;
     
     private int size = 0;
     private E[] array = (E[]) new Comparable[MIN_SIZE];
+
 
 
     int size(){
         return size;
     }
 
+    @Override
+    public String toString() {
+        String res = "[ ";
+
+        for(E elem : array){
+            res += elem + ", ";
+        }
+
+        res += "]";
+        return res;
+    }
+
+
     void add(E elem){
+        if(size == array.length) grow();
+
         array[size] = elem;
         floatUp(size);
         size ++;
@@ -24,6 +42,7 @@ public class Heap <E extends Comparable<E>>{
 
     E removeFirst(){
         if(size == 0) return null;
+        if(size < array.length * MIN_FILL_FACTOR) shrink();
         
         size--;
         swap(0, size);
@@ -33,6 +52,8 @@ public class Heap <E extends Comparable<E>>{
         array[size] = null;
         return elem;
     }
+
+
 
     private void floatUp(int node){
         if(node < 1) return; 
@@ -59,6 +80,20 @@ public class Heap <E extends Comparable<E>>{
         }
     }
 
+
+
+    private boolean isBefore(int comparison){
+        return IS_MAX_HEAP ? comparison > 0 : comparison < 0;
+    }
+
+    private void swap(int j, int k){
+        final E elemJ = array[j];
+        array[j] = array[k];
+        array[k] = elemJ;
+    }
+
+
+
     private int getParent(int node){
         return (int) (Math.ceil(node / 2d) - 1);
     }
@@ -71,26 +106,24 @@ public class Heap <E extends Comparable<E>>{
         return 2* node +2; 
     }
 
-    private boolean isBefore(int comparison){
-        return IS_MAX_HEAP ? comparison > 0 : comparison < 0;
+
+    
+    private void grow(){
+        final int newSize = (int) Math.floor(array.length * GROWTH_FACTOR);
+        resize(newSize);
     }
 
-    private void swap(int j, int k){
-        final E elemJ = array[j];
-        array[j] = array[k];
-        array[k] = elemJ;
+    private void shrink(){
+        int newSize = (int) Math.floor(array.length / GROWTH_FACTOR);
+        if(newSize < MIN_SIZE) newSize = MIN_SIZE;
+        resize(newSize);
     }
 
-    @Override
-    public String toString() {
-        String res = "[ ";
+    private void resize(int newSize){
+        final E[] newArr = (E[]) new Comparable[newSize];
+        System.arraycopy(array, 0, newArr, 0, size);
 
-        for(E elem : array){
-            res += elem + ", ";
-        }
-
-        res += "]";
-        return res;
+        array = newArr;
     }
 }
 
@@ -99,7 +132,7 @@ class TestHeap{
         Heap<Integer> heap = new Heap<>();
 
         final Random r = new Random();
-        for(int i = 0; i < 8; i++){
+        for(int i = 0; i < 20; i++){
             heap.add(r.nextInt(100));
         }
         System.out.println(heap);
@@ -111,5 +144,6 @@ class TestHeap{
         } while(elem != null);
         System.out.println();
 
+        System.out.println(heap);
     }
 }
