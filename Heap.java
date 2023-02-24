@@ -107,7 +107,7 @@ public class Heap <E extends Comparable<E>>{
     }
 
 
-    
+
     private void grow(){
         final int newSize = (int) Math.floor(array.length * GROWTH_FACTOR);
         resize(newSize);
@@ -126,6 +126,8 @@ public class Heap <E extends Comparable<E>>{
         array = newArr;
     }
 }
+
+
 
 class TestHeap{
     public static void main(String[] args) {
