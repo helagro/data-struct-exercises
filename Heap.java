@@ -9,6 +9,16 @@ public class Heap <E extends Comparable<E>>{
     private int size = 0;
     private E[] array = (E[]) new Comparable[MIN_SIZE];
 
+    Heap(){}
+
+    Heap(E[] array){
+        size = array.length;
+        this.array = array;
+
+        for(int i = array.length/2 -1; i >= 0; i--){
+            sink(i);
+        }
+    }
 
 
     int size(){
@@ -131,6 +141,10 @@ public class Heap <E extends Comparable<E>>{
 
 class TestHeap{
     public static void main(String[] args) {
+        test2();
+    }
+
+    public static void test1() {
         Heap<Integer> heap = new Heap<>();
 
         final Random r = new Random();
@@ -147,5 +161,25 @@ class TestHeap{
         System.out.println();
 
         System.out.println(heap);
+    }
+
+    public static void test2() {
+        Integer[] arr = new Integer[20];
+
+        final Random r = new Random();
+        for(int i = 0; i < 20; i++){
+            arr[i] = r.nextInt(100);
+        }
+
+        Heap<Integer> heap = new Heap<>(arr);
+
+        System.out.println(heap);
+
+        Integer elem;
+        do{
+            elem = heap.removeFirst();
+            System.out.print(elem + ", ");
+        } while(elem != null);
+        System.out.println();
     }
 }
