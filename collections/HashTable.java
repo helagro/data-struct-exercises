@@ -1,3 +1,4 @@
+package collections;
 public class HashTable<K, V>{
     static final double MAX_LOAD_FACTOR = 0.7;
     static final double MIN_LOAD_FACTOR = 0.3;

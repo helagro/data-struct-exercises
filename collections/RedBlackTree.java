@@ -1,3 +1,4 @@
+package collections;
 
 public class RedBlackTree<E extends Comparable<E>>{
     Node<E> root;

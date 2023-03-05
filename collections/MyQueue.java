@@ -1,3 +1,4 @@
+package collections;
 import java.util.NoSuchElementException;
 
 public class MyQueue <E>{

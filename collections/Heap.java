@@ -1,3 +1,4 @@
+package collections;
 import java.util.Random;
 
 public class Heap <E extends Comparable<E>>{
@@ -9,9 +10,9 @@ public class Heap <E extends Comparable<E>>{
     private int size = 0;
     private E[] array = (E[]) new Comparable[MIN_SIZE];
 
-    Heap(){}
+    public Heap(){}
 
-    Heap(E[] array){
+    public Heap(E[] array){
         size = array.length;
         this.array = array;
 
@@ -21,7 +22,7 @@ public class Heap <E extends Comparable<E>>{
     }
 
 
-    int size(){
+    public int size(){
         return size;
     }
 
@@ -38,7 +39,7 @@ public class Heap <E extends Comparable<E>>{
     }
 
 
-    void add(E elem){
+    public void add(E elem){
         if(size == array.length) grow();
 
         array[size] = elem;
@@ -46,11 +47,11 @@ public class Heap <E extends Comparable<E>>{
         size ++;
     }
 
-    E getFirst(){
+    public E getFirst(){
         return array[0];
     }
 
-    E removeFirst(){
+    public E removeFirst(){
         if(size == 0) return null;
         if(size < array.length * MIN_FILL_FACTOR) shrink();
         
