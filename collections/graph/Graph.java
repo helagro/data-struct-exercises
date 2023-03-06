@@ -7,8 +7,8 @@ import collections.RedBlackTree;
 public class Graph <E extends Comparable<E>>{
     int vertexCount = 0;
     int edgeCount = 0;
-    Heap<Edge<E>> edges = new Heap<Edge<E>>();
-    RedBlackTree<Vertex<E>> vertecies = new RedBlackTree<Vertex<E>>();
+    public Heap<Edge<E>> edges = new Heap<Edge<E>>();
+    public RedBlackTree<Vertex<E>> vertecies = new RedBlackTree<Vertex<E>>();
 
 
     public void addVertex(E value){
@@ -20,13 +20,12 @@ public class Graph <E extends Comparable<E>>{
         vertexCount++;
     }
 
-    void addEdge(Edge<E> edge){
+    public void addEdge(Edge<E> edge){
         edges.add(edge);
         edge.start.edges.add(edge);
         edge.end.edges.add(edge);
         edgeCount++;
     }
-
 }
 
 

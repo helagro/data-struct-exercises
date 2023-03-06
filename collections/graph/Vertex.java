@@ -3,8 +3,8 @@ package collections.graph;
 import java.util.LinkedList;
 
 public class Vertex<E extends Comparable<E>> implements Comparable<Vertex<E>>{
-    E value;
-    LinkedList<Edge<E>> edges = new LinkedList<Edge<E>>();
+    public E value;
+    public LinkedList<Edge<E>> edges = new LinkedList<Edge<E>>();
 
     public Vertex(E value) {
         this.value = value;
@@ -24,6 +24,11 @@ public class Vertex<E extends Comparable<E>> implements Comparable<Vertex<E>>{
         }
 
         return outgoing;
+    }
+
+    @Override
+    public String toString() {
+        return value.toString();
     }
 
 }

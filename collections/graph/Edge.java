@@ -1,9 +1,9 @@
 package collections.graph;
 
 public class Edge<E extends Comparable<E>> implements Comparable<Edge<E>>{
-    Vertex<E> start;
-    Vertex<E> end;
-    double weight;
+    public Vertex<E> start;
+    public Vertex<E> end;
+    public double weight;
 
     public Edge(Vertex<E> start, Vertex<E> end, double weight) {
         this.start = start;
